@@ -1,5 +1,5 @@
 /**
- * LegoBrick.h
+ * LegoBrick.hpp
  *
  * Author: Wes Johnson
  * Author: Jeremy Stilwell
