@@ -14,18 +14,20 @@ using namespace std;
 /**
  * Draws the wall of cubes in the scene by using a DrawShape object
  */
-void drawCube()
+void drawBrick(LegoBrick legoBrick)
 {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     
     
+    
 }
 
 void render()
 {
-
+    LegoBrick legoBrick;
+    drawBrick(legoBrick);
     glFlush();
     glutSwapBuffers();
 }
