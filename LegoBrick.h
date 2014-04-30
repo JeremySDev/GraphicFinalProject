@@ -15,7 +15,8 @@
 #define HEIGHT 2
 #define STUD_WIDTH 1
 
-class LegoBrick {
+class LegoBrick 
+{
     enum BrickType { 1x1 = 1, 1x2 = 2, 2x2 = 4, 2x4 = 8 };
     GLfloat length;
     GLfloat width;

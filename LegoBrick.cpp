@@ -19,6 +19,7 @@ GLfloat colors[4][3] = {
     {0.0, 0.0, 1.0}, //Blue
     {0.0, 0.5, 0.5}  //Yellow
 }
+
 int currColor = 0;
 
 void LegoBrick::LegoBrick(BrickType type) {
