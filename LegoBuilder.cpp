@@ -20,10 +20,10 @@ void drawBrick(LegoBrick legoBrick)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     legoBrick.LegoBrickConstr();
-    
-    
-    
-    
+
+
+
+
 }
 
 void render()
@@ -38,7 +38,7 @@ void render()
  * Keyboard function that handles moving and rotating the cube 
  * based on input from the keyboard.
  */
-void keyboardFunc (unsigned char key, int x, int y) 
+void keyboardFunc(unsigned char key, int x, int y)
 {
     switch (key) {
         case 'w':
@@ -66,8 +66,8 @@ void keyboardFunc (unsigned char key, int x, int y)
 /* enables certain settings and clears out others before the start of the render*/
 void init(void)
 {
-    glClearColor( 0.0, 0.0, 0.0, 0.0 );
-    glClearDepth( 1.0 );
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearDepth(1.0);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glShadeModel(GL_SMOOTH);
@@ -86,19 +86,18 @@ void reshape(int w, int h)
     glMatrixMode(GL_MODELVIEW);
 }*/
 
-
 /* main starts the program */
 int main(int argc, char** argv)
 {
-    glutInit(&argc,argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowPosition(1040, 10);
     glutInitWindowSize(800, 600);
     glutCreateWindow("Lego Builder");
     init();
     glutDisplayFunc(render);
     glutKeyboardFunc(keyboardFunc);
-    glutIdleFunc(render);    
+    glutIdleFunc(render);
     glutMainLoop();
     return 0;
 }
