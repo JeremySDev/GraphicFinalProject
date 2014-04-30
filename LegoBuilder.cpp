@@ -10,22 +10,37 @@
 #include <GL/glut.h>
 #include "LegoBrick.hpp"
 using namespace std;
+int window;
+LegoBrick legoBrickG;
 
+float rotateX = 0.0f;
+float rotateY = 0.0f;
+float rotateZ = 0.0f;
 /**
  * Draws the wall of cubes in the scene by using a DrawShape object
  */
-void drawCube()
+void drawBrick(LegoBrick legoBrick)
 {
-
+    //BrickType bType = x11;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     
-    
+    glRotatef(rotateX, 1.0, 0.0, 0.0);
+    glRotatef(rotateY, 0.0, 1.0, 0.0);
+    glRotatef(rotateZ, 0.0, 0.0, 1.0);
+    //glRotatef(55.0, 0.0, 0.0, 1.0);
+    legoBrickG = legoBrick;
+    legoBrick.LegoBrickConstr();
+    //legoBrick.ChangeColor();
+    legoBrick.DrawBrick();
+
+
 }
 
 void render()
 {
-
+    LegoBrick legoBrick;
+    drawBrick(legoBrick);
     glFlush();
     glutSwapBuffers();
 }
@@ -34,27 +49,31 @@ void render()
  * Keyboard function that handles moving and rotating the cube 
  * based on input from the keyboard.
  */
-void keyboardFunc (unsigned char key, int x, int y) 
+void keyboardFunc(unsigned char key, int x, int y)
 {
     switch (key) {
         case 'w':
+            rotateX = rotateX + 10.0;
             glutPostRedisplay();
             break;
-
         case 's':
+            rotateY = rotateX + 10.0;
             glutPostRedisplay();
             break;
-
         case 'a':
+            rotateZ = rotateX + 10.0;
             glutPostRedisplay();
             break;
-
         case 'd':
+            
             glutPostRedisplay();
             break;
-
         case 'r':
+            legoBrickG.ChangeColor();
             glutPostRedisplay();
+            break;
+        case 'o':            
+            glutDestroyWindow(window);
             break;
     }
 }
@@ -62,8 +81,8 @@ void keyboardFunc (unsigned char key, int x, int y)
 /* enables certain settings and clears out others before the start of the render*/
 void init(void)
 {
-    glClearColor( 0.0, 0.0, 0.0, 0.0 );
-    glClearDepth( 1.0 );
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearDepth(1.0);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glShadeModel(GL_SMOOTH);
@@ -82,19 +101,18 @@ void reshape(int w, int h)
     glMatrixMode(GL_MODELVIEW);
 }*/
 
-
 /* main starts the program */
 int main(int argc, char** argv)
 {
-    glutInit(&argc,argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH );
-    glutInitWindowPosition(1040, 10);
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitWindowPosition(800, 150);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("Lego Builder");
+    window = glutCreateWindow("Lego Builder");
     init();
     glutDisplayFunc(render);
     glutKeyboardFunc(keyboardFunc);
-    glutIdleFunc(render);    
+    glutIdleFunc(render);
     glutMainLoop();
     return 0;
 }
