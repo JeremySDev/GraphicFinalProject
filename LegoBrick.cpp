@@ -2,6 +2,7 @@
  * LegoBrick.cpp
  *
  * Author: Wes Johnson
+ * Author: Jeremy Stilwell
  * Date:   4/1/14
  *
  * This program implements the object logic and draw function for various shapes of lego brick.

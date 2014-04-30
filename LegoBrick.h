@@ -2,6 +2,7 @@
  * LegoBrick.h
  *
  * Author: Wes Johnson
+ * Author: Jeremy Stilwell
  * Date:   4/21/14
  *
  * This header defines the LegoBrick class and its methods
