@@ -10,7 +10,12 @@
 #include <GL/glut.h>
 #include "LegoBrick.hpp"
 using namespace std;
+int window;
+LegoBrick legoBrickG;
 
+float rotateX = 0.0f;
+float rotateY = 0.0f;
+float rotateZ = 0.0f;
 /**
  * Draws the wall of cubes in the scene by using a DrawShape object
  */
@@ -19,9 +24,15 @@ void drawBrick(LegoBrick legoBrick)
     //BrickType bType = x11;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
+    
+    glRotatef(rotateX, 1.0, 0.0, 0.0);
+    glRotatef(rotateY, 0.0, 1.0, 0.0);
+    glRotatef(rotateZ, 0.0, 0.0, 1.0);
+    //glRotatef(55.0, 0.0, 0.0, 1.0);
+    legoBrickG = legoBrick;
     legoBrick.LegoBrickConstr();
-
-
+    //legoBrick.ChangeColor();
+    legoBrick.DrawBrick();
 
 
 }
@@ -42,23 +53,27 @@ void keyboardFunc(unsigned char key, int x, int y)
 {
     switch (key) {
         case 'w':
+            rotateX = rotateX + 10.0;
             glutPostRedisplay();
             break;
-
         case 's':
+            rotateY = rotateX + 10.0;
             glutPostRedisplay();
             break;
-
         case 'a':
+            rotateZ = rotateX + 10.0;
             glutPostRedisplay();
             break;
-
         case 'd':
+            
             glutPostRedisplay();
             break;
-
         case 'r':
+            legoBrickG.ChangeColor();
             glutPostRedisplay();
+            break;
+        case 'o':            
+            glutDestroyWindow(window);
             break;
     }
 }
@@ -91,9 +106,9 @@ int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowPosition(1040, 10);
+    glutInitWindowPosition(800, 150);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("Lego Builder");
+    window = glutCreateWindow("Lego Builder");
     init();
     glutDisplayFunc(render);
     glutKeyboardFunc(keyboardFunc);

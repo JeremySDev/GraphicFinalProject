@@ -101,6 +101,9 @@ void LegoBrick::DrawBrick()
     glEnd();
 }
 
+/**
+ * ChangeColor alters the color of the brick before it is commited to the scene
+ */
 void LegoBrick::ChangeColor()
 {
     if (currColor < 3)
