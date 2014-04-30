@@ -18,25 +18,25 @@ GLfloat colors[4][3] = {
     {0.0, 1.0, 0.0}, //Green
     {0.0, 0.0, 1.0}, //Blue
     {0.0, 0.5, 0.5}  //Yellow
-}
+};
 
 int currColor = 0;
 
 void LegoBrick::LegoBrickConstr(BrickType type) {
     switch(type) {
-        case 1x1:
+        case x11:
             length = 1 * STUD_WIDTH;
             width  = 1 * STUD_WIDTH;
             break;
-        case 1x2:
+        case x21:
             length = 1 * STUD_WIDTH;
             width  = 2 * STUD_WIDTH;
             break;
-        case 2x2:
+        case x22:
             length = 2 * STUD_WIDTH;
             width  = 2 * STUD_WIDTH;
             break;
-        case 2x4:
+        case x42:
             length = 4 * STUD_WIDTH;
             width  = 2 * STUD_WIDTH;
             break;

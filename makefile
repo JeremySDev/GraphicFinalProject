@@ -1,4 +1,4 @@
-CC=g++
+CC=clang++
 LDLIBS=-lGL -lGLU -lglut
 all:  run
 LegoBuilder: LegoBuilder.o LegoBrick.o run

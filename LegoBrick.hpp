@@ -17,7 +17,7 @@
 
 class LegoBrick 
 {
-    enum BrickType { x11 = 1, x21 = 2, x22 = 4, x44 = 8 };
+    enum BrickType { x11 = 1, x21 = 2, x22 = 4, x42 = 8 };
     GLfloat length;
     GLfloat width;
     public:
