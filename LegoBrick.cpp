@@ -10,11 +10,36 @@
 #include <math.h>
 #include <GL/glut.h>
 #include "LegoBrick.h"
-
 using namespace std;
 
+GLfloat colors[4][3] = {
+    {1.0, 0.0, 0.0}, //Red
+    {0.0, 1.0, 0.0}, //Green
+    {0.0, 0.0, 1.0}, //Blue
+    {0.0, 0.5, 0.5}  //Yellow
+}
+int currColor = 0;
+
 void LegoBrick::LegoBrick(BrickType type) {
-    
+    switch(type) {
+        case 1x1:
+            length = 1 * STUD_WIDTH;
+            width  = 1 * STUD_WIDTH;
+            break;
+        case 1x2:
+            length = 1 * STUD_WIDTH;
+            width  = 2 * STUD_WIDTH;
+            break;
+        case 2x2:
+            length = 2 * STUD_WIDTH;
+            width  = 2 * STUD_WIDTH;
+            break;
+        case 2x4:
+            length = 4 * STUD_WIDTH;
+            width  = 2 * STUD_WIDTH;
+            break;
+    }
+}
 
 /**
  * Draw a brick
@@ -23,52 +48,53 @@ void LegoBrick::LegoBrick(BrickType type) {
  */
 void LegoBrick::DrawBrick() {
     glBegin(GL_QUADS);
-        //Front/Back Color
-        glColor3f(colors[colorChoice][colorFlip][0],
-                  colors[colorChoice][colorFlip][1],
-                  colors[colorChoice][colorFlip][2]);
+        glColor3f(colors[currColor][0],
+                  colors[currColor][1],
+                  colors[currColor][2]);
+        
         //Front Face
-        glVertex3f(centerX + r, centerY + r, centerZ + r);
-        glVertex3f(centerX - r, centerY + r, centerZ + r);
-        glVertex3f(centerX - r, centerY - r, centerZ + r);
-        glVertex3f(centerX + r, centerY - r, centerZ + r);
+        glVertex3f(0.0 + (width / 2), 0.0 + (HEIGHT / 2), 0.0 + (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 + (HEIGHT / 2), 0.0 + (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 - (HEIGHT / 2), 0.0 + (length / 2));
+        glVertex3f(0.0 + (width / 2), 0.0 - (HEIGHT / 2), 0.0 + (length / 2));
 
         //Back Face
-        glVertex3f(centerX + r, centerY - r, centerZ - r);
-        glVertex3f(centerX - r, centerY - r, centerZ - r);
-        glVertex3f(centerX - r, centerY + r, centerZ - r);
-        glVertex3f(centerX + r, centerY + r, centerZ - r);
+        glVertex3f(0.0 + (width / 2), 0.0 - (HEIGHT / 2), 0.0 - (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 - (HEIGHT / 2), 0.0 - (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 + (HEIGHT / 2), 0.0 - (length / 2));
+        glVertex3f(0.0 + (width / 2), 0.0 + (HEIGHT / 2), 0.0 - (length / 2));
 
-        //Top/Bottom Color
-        glColor3f(colors[colorChoice][(colorFlip + 1) % 3][0],
-                  colors[colorChoice][(colorFlip + 1) % 3][1],
-                  colors[colorChoice][(colorFlip + 1) % 3][2]);
         //Top Face
-        glVertex3f(centerX + r, centerY + r, centerZ - r);
-        glVertex3f(centerX - r, centerY + r, centerZ - r);
-        glVertex3f(centerX - r, centerY + r, centerZ + r);
-        glVertex3f(centerX + r, centerY + r, centerZ + r);
+        glVertex3f(0.0 + (width / 2), 0.0 + (HEIGHT / 2), 0.0 - (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 + (HEIGHT / 2), 0.0 - (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 + (HEIGHT / 2), 0.0 + (length / 2));
+        glVertex3f(0.0 + (width / 2), 0.0 + (HEIGHT / 2), 0.0 + (length / 2));
 
         //Bottom Face
-        glVertex3f(centerX + r, centerY - r, centerZ + r);
-        glVertex3f(centerX - r, centerY - r, centerZ + r);
-        glVertex3f(centerX - r, centerY - r, centerZ - r);
-        glVertex3f(centerX + r, centerY - r, centerZ - r);
+        glVertex3f(0.0 + (width / 2), 0.0 - (HEIGHT / 2), 0.0 + (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 - (HEIGHT / 2), 0.0 + (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 - (HEIGHT / 2), 0.0 - (length / 2));
+        glVertex3f(0.0 + (width / 2), 0.0 - (HEIGHT / 2), 0.0 - (length / 2));
 
-        //Left/Right Color
-        glColor3f(colors[colorChoice][(colorFlip + 2) % 3][0],
-                  colors[colorChoice][(colorFlip + 2) % 3][1],
-                  colors[colorChoice][(colorFlip + 2) % 3][2]);
         //Left Face
-        glVertex3f(centerX - r, centerY + r, centerZ + r);
-        glVertex3f(centerX - r, centerY + r, centerZ - r);
-        glVertex3f(centerX - r, centerY - r, centerZ - r);
-        glVertex3f(centerX - r, centerY - r, centerZ + r);
+        glVertex3f(0.0 - (width / 2), 0.0 + (HEIGHT / 2), 0.0 + (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 + (HEIGHT / 2), 0.0 - (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 - (HEIGHT / 2), 0.0 - (length / 2));
+        glVertex3f(0.0 - (width / 2), 0.0 - (HEIGHT / 2), 0.0 + (length / 2));
 
         //Right Face
-        glVertex3f(centerX + r, centerY + r, centerZ - r);
-        glVertex3f(centerX + r, centerY + r, centerZ + r);
-        glVertex3f(centerX + r, centerY - r, centerZ + r);
-        glVertex3f(centerX + r, centerY - r, centerZ - r);
+        glVertex3f(0.0 + (width / 2), 0.0 + (HEIGHT / 2), 0.0 - (length / 2));
+        glVertex3f(0.0 + (width / 2), 0.0 + (HEIGHT / 2), 0.0 + (length / 2));
+        glVertex3f(0.0 + (width / 2), 0.0 - (HEIGHT / 2), 0.0 + (length / 2));
+        glVertex3f(0.0 + (width / 2), 0.0 - (HEIGHT / 2), 0.0 - (length / 2));
     glEnd();
+}
+
+void LegoBrick::ChangeColor() {
+    if(currColor < 3) {
+        currColor++;
+    } else {
+        currColor = 0;
+    }
+    DrawBrick();
 }
