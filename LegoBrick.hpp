@@ -17,11 +17,11 @@
 
 class LegoBrick 
 {
-    enum BrickType { 1x1 = 1, 1x2 = 2, 2x2 = 4, 2x4 = 8 };
+    enum BrickType { x11 = 1, x21 = 2, x22 = 4, x44 = 8 };
     GLfloat length;
     GLfloat width;
     public:
-        void LegoBrick(BrickType type);
+        void LegoBrickConstr(BrickType type);
         void DrawBrick();
         void ChangeColor();
 };

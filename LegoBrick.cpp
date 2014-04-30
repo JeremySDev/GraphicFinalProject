@@ -10,7 +10,7 @@
 #include <iostream>
 #include <math.h>
 #include <GL/glut.h>
-#include "LegoBrick.h"
+#include "LegoBrick.hpp"
 using namespace std;
 
 GLfloat colors[4][3] = {
@@ -22,7 +22,7 @@ GLfloat colors[4][3] = {
 
 int currColor = 0;
 
-void LegoBrick::LegoBrick(BrickType type) {
+void LegoBrick::LegoBrickConstr(BrickType type) {
     switch(type) {
         case 1x1:
             length = 1 * STUD_WIDTH;

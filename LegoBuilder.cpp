@@ -8,7 +8,7 @@
 #include <iostream>
 #include <math.h>
 #include <GL/glut.h>
-#include "LegoBrick.h"
+#include "LegoBrick.hpp"
 using namespace std;
 
 /**
