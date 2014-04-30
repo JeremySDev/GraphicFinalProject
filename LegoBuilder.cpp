@@ -16,9 +16,11 @@ using namespace std;
  */
 void drawBrick(LegoBrick legoBrick)
 {
-
+    //BrickType bType = x11;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
+    legoBrick.LegoBrickConstr();
+    
     
     
     
