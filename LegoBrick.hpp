@@ -23,6 +23,7 @@ class LegoBrick {
     GLfloat length;
     GLfloat width;
 public:
+    void LegoBrickConstr();
     void LegoBrickConstr(BrickType type);
     void DrawBrick();
     void ChangeColor();
