@@ -24,7 +24,8 @@ void drawBrick(LegoBrick legoBrick)
     //BrickType bType = x11;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    
+    glOrtho(-12.0, 12.0, -12, 12, -12.0, 12.0);
+
     glRotatef(rotateX, 1.0, 0.0, 0.0);
     glRotatef(rotateY, 0.0, 1.0, 0.0);
     glRotatef(rotateZ, 0.0, 0.0, 1.0);
@@ -89,6 +90,7 @@ void init(void)
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
     glEnable(GL_LIGHT0);
+    glOrtho(-12.0, 12.0, -12, 12, -12.0, 12.0);
 }
 
 /* helps change the geometry to match any changes for window resizing 
