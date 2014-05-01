@@ -61,36 +61,42 @@ void LegoBrick::DrawBrick()
             colors[curColor][2]);
 
     //Front Face
+    glNormal3d(0, 0, 1);
     glVertex3f(curX + (width / 2), curY + (HEIGHT / 2), curZ + (length / 2));
     glVertex3f(curX - (width / 2), curY + (HEIGHT / 2), curZ + (length / 2));
     glVertex3f(curX - (width / 2), curY - (HEIGHT / 2), curZ + (length / 2));
     glVertex3f(curX + (width / 2), curY - (HEIGHT / 2), curZ + (length / 2));
 
     //Back Face
+    glNormal3d(0, 0, -1);
     glVertex3f(curX + (width / 2), curY - (HEIGHT / 2), curZ - (length / 2));
     glVertex3f(curX - (width / 2), curY - (HEIGHT / 2), curZ - (length / 2));
     glVertex3f(curX - (width / 2), curY + (HEIGHT / 2), curZ - (length / 2));
     glVertex3f(curX + (width / 2), curY + (HEIGHT / 2), curZ - (length / 2));
 
     //Top Face
+    glNormal3d(0, 1, 0);
     glVertex3f(curX + (width / 2), curY + (HEIGHT / 2), curZ - (length / 2));
     glVertex3f(curX - (width / 2), curY + (HEIGHT / 2), curZ - (length / 2));
     glVertex3f(curX - (width / 2), curY + (HEIGHT / 2), curZ + (length / 2));
     glVertex3f(curX + (width / 2), curY + (HEIGHT / 2), curZ + (length / 2));
 
     //Bottom Face
+    glNormal3d(0, -1, 0);
     glVertex3f(curX + (width / 2), curY - (HEIGHT / 2), curZ + (length / 2));
     glVertex3f(curX - (width / 2), curY - (HEIGHT / 2), curZ + (length / 2));
     glVertex3f(curX - (width / 2), curY - (HEIGHT / 2), curZ - (length / 2));
     glVertex3f(curX + (width / 2), curY - (HEIGHT / 2), curZ - (length / 2));
 
     //Left Face
+    glNormal3d(-1, 0, 0);
     glVertex3f(curX - (width / 2), curY + (HEIGHT / 2), curZ + (length / 2));
     glVertex3f(curX - (width / 2), curY + (HEIGHT / 2), curZ - (length / 2));
     glVertex3f(curX - (width / 2), curY - (HEIGHT / 2), curZ - (length / 2));
     glVertex3f(curX - (width / 2), curY - (HEIGHT / 2), curZ + (length / 2));
 
     //Right Face
+    glNormal3d(1, 0, 0);
     glVertex3f(curX + (width / 2), curY + (HEIGHT / 2), curZ - (length / 2));
     glVertex3f(curX + (width / 2), curY + (HEIGHT / 2), curZ + (length / 2));
     glVertex3f(curX + (width / 2), curY - (HEIGHT / 2), curZ + (length / 2));
@@ -110,6 +116,13 @@ void LegoBrick::ChangeColor()
     {
         curColor = 0;
     }
+    DrawBrick();
+}
+
+void LegoBrick::Rotate() {
+    GLfloat temp = length;
+    length = width;
+    width = temp;
     DrawBrick();
 }
 

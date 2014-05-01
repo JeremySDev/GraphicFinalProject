@@ -32,6 +32,7 @@ public:
     LegoBrick(BrickType type);
     void DrawBrick();
     void ChangeColor();
+    void Rotate();
     void ChangeX(GLfloat offset);
     void ChangeY(GLfloat offset);
     void ChangeZ(GLfloat offset);
