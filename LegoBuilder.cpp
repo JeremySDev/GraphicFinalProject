@@ -19,18 +19,6 @@ float rotateY = 0.0f;
 float rotateZ = 0.0f;
 
 int curBrick = 0;
-/**
- * Draws the wall of cubes in the scene by using a DrawShape object
- */
-/*void drawBrick(LegoBrick legoBrick)
-{
-    //BrickType bType = x11;
-
-    glRotatef(rotateX, 1.0, 0.0, 0.0);
-    glRotatef(rotateY, 0.0, 1.0, 0.0);
-    glRotatef(rotateZ, 0.0, 0.0, 1.0);
-    glRotatef(90.0, 0.0, 0.0, 1.0);
-}*/
 
 void render()
 {
@@ -39,13 +27,9 @@ void render()
     glLoadIdentity();
     gluLookAt(1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
     glEnable(GL_DEPTH_TEST);
-    //glPushMatrix();
     for(int i = 0; i < bricks.size(); i++) {
         bricks.at(i).DrawBrick();
     }
-    //glTranslatef(0.0, 0.0, 0.0);
-    //legoBrick.DrawBrick();
-    //glPopMatrix();
     glutSwapBuffers();
 }
 
@@ -55,85 +39,59 @@ void render()
  */
 void keyboardFunc(unsigned char key, int x, int y)
 {
-    float offset = 2;
+    float offset = 1;
     float angle = 90.0f;
     switch (key) {
         case '1':
             bricks.push_back(LegoBrick(x11));
-            curBrick++;
+            curBrick = bricks.size() - 1;
             break;
         case '2':
             bricks.push_back(LegoBrick(x21));
-            curBrick++;
+            curBrick = bricks.size() - 1;
             break;
         case '3':
             bricks.push_back(LegoBrick(x22));
-            curBrick++;
+            curBrick = bricks.size() - 1;
             break;
         case '4':
             bricks.push_back(LegoBrick(x42));
-            curBrick++;
+            curBrick = bricks.size() - 1;
             break;
         case 'w':
             bricks.at(curBrick).ChangeZ(-offset);
-            //rotateX = rotateX + angle;
-            /*if(chosenKey == 0) {
-                legoBrick.ChangeZ(-offset);
-            } else {
-                legoBrick2.ChangeZ(-offset);
-            }*/
             glutPostRedisplay();
             break;
         case 's':
             bricks.at(curBrick).ChangeZ(offset);
-            //rotateY = rotateY + angle;
-            /*if(chosenKey == 0) {
-                legoBrick.ChangeZ(offset);
-            } else {
-                legoBrick2.ChangeZ(offset);
-            }*/
             glutPostRedisplay();
             break;
         case 'a':
             bricks.at(curBrick).ChangeX(-offset);
-            //rotateZ = rotateZ + angle;
-            /*if(chosenKey == 0) {
-                legoBrick.ChangeX(-offset);
-            } else {
-                legoBrick2.ChangeX(-offset);
-            }*/
             glutPostRedisplay();
             break;
         case 'd':
             bricks.at(curBrick).ChangeX(offset);
-            /*if(chosenKey == 0) {
-                legoBrick.ChangeX(offset);
-            } else {
-                legoBrick2.ChangeX(offset);
-            }*/
+            glutPostRedisplay();
+            break;
+        case 'q':
+            bricks.at(curBrick).ChangeY(offset);
+            glutPostRedisplay();
+            break;
+        case 'e':
+            bricks.at(curBrick).ChangeY(-offset);
+            glutPostRedisplay();
+            break;
+        case 'c':
+            bricks.at(curBrick).ChangeColor();
             glutPostRedisplay();
             break;
         case 'r':
-            if(curBrick < bricks.size()) {
+            if(curBrick < bricks.size() - 1) {
                 curBrick++;
             } else {
                 curBrick = 0;
             }
-            /*if(chosenKey == 0) {
-                chosenKey = 1;
-            } else {
-                chosenKey = 0;
-            }*/
-            //legoBrickG.ChangeColor();
-            //glutPostRedisplay();
-            break;
-        case 'q':
-            /*if(chosenKey == 0) {
-                legoBrick.ChangeColor();
-            } else {
-                legoBrick2.ChangeColor();
-            }*/
-            glutPostRedisplay();
             break;
         case 'o':            
             glutDestroyWindow(window);
