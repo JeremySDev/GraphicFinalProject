@@ -58,15 +58,14 @@ void keyboardFunc(unsigned char key, int x, int y)
             glutPostRedisplay();
             break;
         case 's':
-            rotateY = rotateX + 10.0;
+            rotateY = rotateY + 10.0;
             glutPostRedisplay();
             break;
         case 'a':
-            rotateZ = rotateX + 10.0;
+            rotateZ = rotateZ + 10.0;
             glutPostRedisplay();
             break;
-        case 'd':
-            
+        case 'd':            
             glutPostRedisplay();
             break;
         case 'r':
