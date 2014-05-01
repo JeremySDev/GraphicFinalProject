@@ -45,6 +45,7 @@ LegoBrick::LegoBrick(BrickType type)
     curY = 0.0f;
     curZ = 0.0f;
     curColor = 0;
+    brickType = type;
 }
 
 /**
@@ -122,4 +123,8 @@ void LegoBrick::ChangeY(GLfloat offset) {
 
 void LegoBrick::ChangeZ(GLfloat offset) {
     curZ += offset;
+}
+
+int LegoBrick::GetBrickType() {
+    return brickType;
 }

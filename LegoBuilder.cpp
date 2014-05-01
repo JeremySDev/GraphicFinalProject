@@ -6,26 +6,19 @@
  * Date:   4/21/14
  */
 #include <iostream>
-#include <math.h>
 #include <GL/glut.h>
+#include <vector>
 #include "LegoBrick.hpp"
 using namespace std;
+
 int window;
 
-LegoBrick legoBrick(x42);
-LegoBrick legoBrick2(x11);
+std::vector<LegoBrick> bricks;
 float rotateX = 0.0f;
 float rotateY = 0.0f;
 float rotateZ = 0.0f;
-float xOffset = 0.0f;
-float yOffset = 0.0f;
-float zOffset = 0.0f;
 
-float xOffset2 = 0.0f;
-float yOffset2 = 0.0f;
-float zOffset2 = 0.0f;
-
-int chosenKey = 0;
+int curBrick = 0;
 /**
  * Draws the wall of cubes in the scene by using a DrawShape object
  */
@@ -46,14 +39,13 @@ void render()
     glLoadIdentity();
     gluLookAt(1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
     glEnable(GL_DEPTH_TEST);
-    glPushMatrix();
-    glTranslatef(0.0, 0.0, 0.0);
-    legoBrick.DrawBrick();
-    glPopMatrix();
-    glPushMatrix();
-    glTranslatef(0.0, 10.0, 0.0);
-    legoBrick2.DrawBrick();
-    glPopMatrix();
+    //glPushMatrix();
+    for(int i = 0; i < bricks.size(); i++) {
+        bricks.at(i).DrawBrick();
+    }
+    //glTranslatef(0.0, 0.0, 0.0);
+    //legoBrick.DrawBrick();
+    //glPopMatrix();
     glutSwapBuffers();
 }
 
@@ -66,56 +58,81 @@ void keyboardFunc(unsigned char key, int x, int y)
     float offset = 2;
     float angle = 90.0f;
     switch (key) {
+        case '1':
+            bricks.push_back(LegoBrick(x11));
+            curBrick++;
+            break;
+        case '2':
+            bricks.push_back(LegoBrick(x21));
+            curBrick++;
+            break;
+        case '3':
+            bricks.push_back(LegoBrick(x22));
+            curBrick++;
+            break;
+        case '4':
+            bricks.push_back(LegoBrick(x42));
+            curBrick++;
+            break;
         case 'w':
+            bricks.at(curBrick).ChangeZ(-offset);
             //rotateX = rotateX + angle;
-            if(chosenKey == 0) {
+            /*if(chosenKey == 0) {
                 legoBrick.ChangeZ(-offset);
             } else {
                 legoBrick2.ChangeZ(-offset);
-            }
+            }*/
             glutPostRedisplay();
             break;
         case 's':
+            bricks.at(curBrick).ChangeZ(offset);
             //rotateY = rotateY + angle;
-            if(chosenKey == 0) {
+            /*if(chosenKey == 0) {
                 legoBrick.ChangeZ(offset);
             } else {
                 legoBrick2.ChangeZ(offset);
-            }
+            }*/
             glutPostRedisplay();
             break;
         case 'a':
+            bricks.at(curBrick).ChangeX(-offset);
             //rotateZ = rotateZ + angle;
-            if(chosenKey == 0) {
+            /*if(chosenKey == 0) {
                 legoBrick.ChangeX(-offset);
             } else {
                 legoBrick2.ChangeX(-offset);
-            }
+            }*/
             glutPostRedisplay();
             break;
         case 'd':
-            if(chosenKey == 0) {
+            bricks.at(curBrick).ChangeX(offset);
+            /*if(chosenKey == 0) {
                 legoBrick.ChangeX(offset);
             } else {
                 legoBrick2.ChangeX(offset);
-            }
+            }*/
             glutPostRedisplay();
             break;
         case 'r':
-            if(chosenKey == 0) {
+            if(curBrick < bricks.size()) {
+                curBrick++;
+            } else {
+                curBrick = 0;
+            }
+            /*if(chosenKey == 0) {
                 chosenKey = 1;
             } else {
                 chosenKey = 0;
-            }
+            }*/
             //legoBrickG.ChangeColor();
             //glutPostRedisplay();
             break;
         case 'q':
-            if(chosenKey == 0) {
+            /*if(chosenKey == 0) {
                 legoBrick.ChangeColor();
             } else {
                 legoBrick2.ChangeColor();
-            }
+            }*/
             glutPostRedisplay();
             break;
         case 'o':            
@@ -136,12 +153,16 @@ void init(void)
     //glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
     //glEnable(GL_LIGHT1);
     glLoadIdentity();
-    glOrtho(-50.0, 50.0, -50, 50, -50.0, 50.0);
+    glOrtho(-20.0, 20.0, -20, 20, -20.0, 20.0);
 }
 
 /* main starts the program */
 int main(int argc, char** argv)
 {
+    //bricks.push_back(LegoBrick(x11));
+    //cout << bricks.at(0).GetBrickType() << endl;
+    bricks.push_back(LegoBrick(x22));
+    //cout << bricks.at(1).GetBrickType() << endl;
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowPosition(800, 150);

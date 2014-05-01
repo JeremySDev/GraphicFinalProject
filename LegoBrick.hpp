@@ -26,6 +26,7 @@ class LegoBrick {
     GLfloat curY;
     GLfloat curZ;
     int curColor;
+    int brickType;
 public:
     //void LegoBrickConstr();
     LegoBrick(BrickType type);
@@ -34,6 +35,7 @@ public:
     void ChangeX(GLfloat offset);
     void ChangeY(GLfloat offset);
     void ChangeZ(GLfloat offset);
+    int GetBrickType();
 };
 
 #endif
