@@ -23,13 +23,13 @@ GLfloat colors[4][3] = {
 
 int currColor = 0;
 
-void LegoBrick::LegoBrickConstr()
+/*void LegoBrick::LegoBrickConstr()
 {
     length = 1 * STUD_WIDTH;
     width = 1 * STUD_WIDTH;
-}
+}*/
 
-void LegoBrick::LegoBrickConstr(BrickType type)
+LegoBrick::LegoBrick(BrickType type)
 {
     switch (type) {
         case x11:

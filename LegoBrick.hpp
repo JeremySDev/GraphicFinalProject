@@ -15,16 +15,16 @@
 #define HEIGHT 2
 #define STUD_WIDTH 1
 
-class LegoBrick {
-
     enum BrickType {
         x11 = 1, x21 = 2, x22 = 4, x42 = 8
     };
+
+class LegoBrick {
     GLfloat length;
     GLfloat width;
 public:
-    void LegoBrickConstr();
-    void LegoBrickConstr(BrickType type);
+    //void LegoBrickConstr();
+    LegoBrick(BrickType type);
     void DrawBrick();
     void ChangeColor();
 };
