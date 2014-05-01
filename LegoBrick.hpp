@@ -15,10 +15,10 @@
 #define HEIGHT 2
 #define STUD_WIDTH 1
 
-//an enumeration for the size of the bricks 
-    enum BrickType {
-        x11 = 1, x21 = 2, x22 = 4, x42 = 8
-    };
+//an enumeration for the size of the bricks.
+enum BrickType {
+    x11 = 1, x21 = 2, x22 = 4, x42 = 8
+};
 
 class LegoBrick {
     //the length of the brick

@@ -21,6 +21,11 @@ GLfloat colors[4][3] = {
     {1.0, 1.0, 0.0} //Yellow
 };
 
+/**
+ * LegoBrick the constructor for the class the take in a param of brick type
+ * and inits all of the fields of the object. Defaults to red for color.
+ * @param type what type of brick i.e. 1x1, 1x2, 2x2, 2x4
+ */
 LegoBrick::LegoBrick(BrickType type)
 {
     switch (type) {
@@ -49,9 +54,8 @@ LegoBrick::LegoBrick(BrickType type)
 }
 
 /**
- * Draw a brick
+ * Draw a brick based on the values of curX, curY, curZ
  *
- * @param BrickType Shape of brick to be drawn
  */
 void LegoBrick::DrawBrick()
 {
@@ -113,18 +117,39 @@ void LegoBrick::ChangeColor()
     DrawBrick();
 }
 
-void LegoBrick::ChangeX(GLfloat offset) {
+/**
+ * ChangeX changes the curX based on the offset passed in.
+ * @param offset the amount by which to change curX
+ */
+void LegoBrick::ChangeX(GLfloat offset)
+{
     curX += offset;
 }
 
-void LegoBrick::ChangeY(GLfloat offset) {
+/**
+ * ChangeY changes the curY based on the offset passed in.
+ * @param offset the amount by which to change curY
+ */
+void LegoBrick::ChangeY(GLfloat offset)
+{
     curY += offset;
 }
 
-void LegoBrick::ChangeZ(GLfloat offset) {
+/**
+ * ChangeZ changes the curZ based on the offset passed in.
+ * @param offset the amount by which to change curZ
+ */
+void LegoBrick::ChangeZ(GLfloat offset)
+{
     curZ += offset;
 }
 
-int LegoBrick::GetBrickType() {
+/**
+ * GetBrickType returns what type of brick the current brick is i.e. 1x1, 1x2, 
+ * 2x2, 2x4
+ * @return the type of the brick 
+ */
+int LegoBrick::GetBrickType()
+{
     return brickType;
 }
