@@ -100,7 +100,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             bricks.at(curBrick).ChangeColor();
             glutPostRedisplay();
             break;
-        //
+        //switches you between previously commited bricks
         case 'r':
             if(curBrick < bricks.size() - 1) {
                 curBrick++;
@@ -121,11 +121,11 @@ void init(void)
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glMatrixMode(GL_PROJECTION);
     //glEnable(GL_DEPTH_TEST);
-    //glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHTING);
     //glShadeModel(GL_SMOOTH);
-    //glEnable(GL_COLOR_MATERIAL);
-    //glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-    //glEnable(GL_LIGHT1);
+    glEnable(GL_COLOR_MATERIAL);
+    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+    glEnable(GL_LIGHT0);
     glLoadIdentity();
     glOrtho(-20.0, 20.0, -20, 20, -20.0, 20.0);
 }
