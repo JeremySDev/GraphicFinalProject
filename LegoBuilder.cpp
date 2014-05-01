@@ -17,11 +17,7 @@ int window;
 
 //a vector that holds all previously created & commited bricks 
 std::vector<LegoBrick> bricks;
-//amounts to rotate on given axis by 
-float rotateX = 0.0f;
-float rotateY = 0.0f;
-float rotateZ = 0.0f;
-
+//index of the currently-selected brick
 int curBrick = 0;
 
 /* Creates the scene and draws the bricks*/
@@ -48,49 +44,52 @@ void keyboardFunc(unsigned char key, int x, int y)
     float offset = 1;
     float angle = 90.0f;
     switch (key) {
-        //1x1 brick
+        //spawn a 1x1 brick
         case '1':
             bricks.push_back(LegoBrick(x11));
             curBrick = bricks.size() - 1;
             break;
-        //2x1 brick
+        //spawn a 2x1 brick
         case '2':
             bricks.push_back(LegoBrick(x21));
             curBrick = bricks.size() - 1;
             break;
-        //2x2 brick
+        //spawn a 2x2 brick
         case '3':
             bricks.push_back(LegoBrick(x22));
             curBrick = bricks.size() - 1;
             break;
-        //2x4 brick
+        //spawn a 2x4 brick
         case '4':
             bricks.push_back(LegoBrick(x42));
             curBrick = bricks.size() - 1;
             break;
-        //changes the position in relation to the z axis. 
+        //moves the current brick backwards 
         case 'w':
             bricks.at(curBrick).ChangeZ(-offset);
             glutPostRedisplay();
             break;
+        //moves the current brick forwards
         case 's':
             bricks.at(curBrick).ChangeZ(offset);
             glutPostRedisplay();
             break;
-        //changes the position in relation to the x axis.
+        //moves the current brick left
         case 'a':
             bricks.at(curBrick).ChangeX(-offset);
             glutPostRedisplay();
             break;
+        //moves the current brick right
         case 'd':
             bricks.at(curBrick).ChangeX(offset);
             glutPostRedisplay();
             break;
-            //change the position in relation to the y axis.
+        //moves the current brick up
         case 'q':
             bricks.at(curBrick).ChangeY(offset);
             glutPostRedisplay();
             break;
+        //moves the current brick down
         case 'e':
             bricks.at(curBrick).ChangeY(-offset);
             glutPostRedisplay();
@@ -105,6 +104,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             bricks.at(curBrick).Rotate();
             glutPostRedisplay();
             break;
+        //change which brick is currently selected
         case 'f':
             if(curBrick < bricks.size() - 1) {
                 curBrick++;
@@ -148,7 +148,7 @@ int main(int argc, char** argv)
     bricks.push_back(LegoBrick(x22));
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowPosition(1050, 150);
+    glutInitWindowPosition(800, 150);
     glutInitWindowSize(800, 600);
     window = glutCreateWindow("Lego Builder");
     init();
@@ -156,5 +156,6 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboardFunc);
     glutIdleFunc(render);
     glutMainLoop();
+
     return 0;
 }
