@@ -22,11 +22,18 @@
 class LegoBrick {
     GLfloat length;
     GLfloat width;
+    GLfloat curX;
+    GLfloat curY;
+    GLfloat curZ;
+    int curColor;
 public:
     //void LegoBrickConstr();
     LegoBrick(BrickType type);
     void DrawBrick();
     void ChangeColor();
+    void ChangeX(GLfloat offset);
+    void ChangeY(GLfloat offset);
+    void ChangeZ(GLfloat offset);
 };
 
 #endif
