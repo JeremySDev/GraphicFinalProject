@@ -29,6 +29,7 @@ void drawBrick(LegoBrick legoBrick)
     glRotatef(rotateX, 1.0, 0.0, 0.0);
     glRotatef(rotateY, 0.0, 1.0, 0.0);
     glRotatef(rotateZ, 0.0, 0.0, 1.0);
+    glRotatef(90.0, 0.0, 0.0, 1.0);
     //glRotatef(55.0, 0.0, 0.0, 1.0);
     legoBrickG = legoBrick;
     legoBrick.LegoBrickConstr();
@@ -52,17 +53,18 @@ void render()
  */
 void keyboardFunc(unsigned char key, int x, int y)
 {
+    float angle = 90.0f;
     switch (key) {
         case 'w':
-            rotateX = rotateX + 10.0;
+            rotateX = rotateX + angle;
             glutPostRedisplay();
             break;
         case 's':
-            rotateY = rotateY + 10.0;
+            rotateY = rotateY + angle;
             glutPostRedisplay();
             break;
         case 'a':
-            rotateZ = rotateZ + 10.0;
+            rotateZ = rotateZ + angle;
             glutPostRedisplay();
             break;
         case 'd':            
@@ -84,11 +86,11 @@ void init(void)
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClearDepth(1.0);
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_LIGHTING);
+    //glEnable(GL_LIGHTING);
     glShadeModel(GL_SMOOTH);
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-    glEnable(GL_LIGHT0);
+    //glEnable(GL_LIGHT1);
     glOrtho(-12.0, 12.0, -12, 12, -12.0, 12.0);
 }
 
