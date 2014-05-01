@@ -1,11 +1,11 @@
 /**
- * LegoBrick.hpp
+ * LegoBrick.hpp - This header defines the LegoBrick class and its methods
  *
  * Author: Wes Johnson
  * Author: Jeremy Stilwell
  * Date:   4/21/14
  *
- * This header defines the LegoBrick class and its methods
+ * 
  */
 #ifndef LEGOBRICK_H
 #define LEGOBRICK_H
@@ -15,7 +15,7 @@
 #define HEIGHT 2
 #define STUD_WIDTH 1
 
-//an enum for the size of the bricks 
+//an enumeration for the size of the bricks 
     enum BrickType {
         x11 = 1, x21 = 2, x22 = 4, x42 = 8
     };
@@ -32,15 +32,22 @@ class LegoBrick {
     //the current z position of the brick
     GLfloat curZ;
     int curColor;
+    //brick type x11, x21, x22, x42
     int brickType;
 public:
-    //void LegoBrickConstr();
+    //Constructor 
     LegoBrick(BrickType type);
+    //draws the brick
     void DrawBrick();
+    //changes the color of the brick
     void ChangeColor();
+    //change the x position of the brick
     void ChangeX(GLfloat offset);
+    //change the y position of the brick
     void ChangeY(GLfloat offset);
+    //change the z position of the brick
     void ChangeZ(GLfloat offset);
+    //get what type of brick
     int GetBrickType();
 };
 
