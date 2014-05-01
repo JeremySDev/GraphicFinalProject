@@ -12,9 +12,12 @@
 #include "LegoBrick.hpp"
 using namespace std;
 
+//the value of the current window
 int window;
 
+//a vector that holds all previously created & commited bricks 
 std::vector<LegoBrick> bricks;
+//amounts to rotate on given axis by 
 float rotateX = 0.0f;
 float rotateY = 0.0f;
 float rotateZ = 0.0f;
@@ -29,6 +32,7 @@ void render()
     glLoadIdentity();
     gluLookAt(1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
     glEnable(GL_DEPTH_TEST);
+    //go through and redraw all the bricks
     for(int i = 0; i < bricks.size(); i++) {
         bricks.at(i).DrawBrick();
     }
@@ -96,6 +100,7 @@ void keyboardFunc(unsigned char key, int x, int y)
             bricks.at(curBrick).ChangeColor();
             glutPostRedisplay();
             break;
+        //
         case 'r':
             if(curBrick < bricks.size() - 1) {
                 curBrick++;
