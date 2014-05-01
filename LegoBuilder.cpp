@@ -118,16 +118,17 @@ void keyboardFunc(unsigned char key, int x, int y)
 /* enables certain settings and clears out others before the start of the render*/
 void init(void)
 {
+    GLdouble orthoVal = 17.5;
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glMatrixMode(GL_PROJECTION);
-    //glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     //glShadeModel(GL_SMOOTH);
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
     glEnable(GL_LIGHT0);
     glLoadIdentity();
-    glOrtho(-20.0, 20.0, -20, 20, -20.0, 20.0);
+    //glOrtho(left,  right, bottom, top,   nearVal, farVal);
+    glOrtho(-orthoVal, orthoVal, -orthoVal, orthoVal, -orthoVal, orthoVal);
 }
 
 /* main starts the program */
@@ -139,7 +140,7 @@ int main(int argc, char** argv)
     //cout << bricks.at(1).GetBrickType() << endl;
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowPosition(800, 150);
+    glutInitWindowPosition(1050, 150);
     glutInitWindowSize(800, 600);
     window = glutCreateWindow("Lego Builder");
     init();
