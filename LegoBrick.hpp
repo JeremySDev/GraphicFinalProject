@@ -13,8 +13,8 @@
 #include<GL/glut.h>
 
 #define HEIGHT 2
-#define SEGMENT_WIDTH 1
-#define STUD_HEIGHT 0.25
+#define SEGMENT_WIDTH 1.0
+#define STUD_HEIGHT 0.30
 #define STUD_RAD 0.4
 
 //an enumeration for the size of the bricks.
@@ -36,6 +36,7 @@ class LegoBrick {
     int curColor;
     //brick type x11, x21, x22, x42
     int brickType;
+    bool rotated;
 public:
     //Constructor 
     LegoBrick(BrickType type);

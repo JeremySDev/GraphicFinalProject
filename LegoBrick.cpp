@@ -51,6 +51,7 @@ LegoBrick::LegoBrick(BrickType type)
     curZ = 0.0f;
     curColor = 0;
     brickType = type;
+    rotated = false;
 }
 
 /**
@@ -113,8 +114,13 @@ void LegoBrick::DrawBrick()
             DrawStud(curX, curY + (HEIGHT / 2), curZ);
             break;
         case 2:
-            DrawStud(curX - (0.25 * width), curY + (HEIGHT / 2), curZ);
-            DrawStud(curX + (0.25 * width), curY + (HEIGHT / 2), curZ);
+            if(!rotated) {
+                DrawStud(curX - (0.25 * width), curY + (HEIGHT / 2), curZ);
+                DrawStud(curX + (0.25 * width), curY + (HEIGHT / 2), curZ);
+            } else {
+                DrawStud(curX, curY + (HEIGHT / 2), curZ - (0.25 * length));
+                DrawStud(curX, curY + (HEIGHT / 2), curZ + (0.25 * length));
+            }
             break;
         case 4:
             DrawStud(curX - (0.25 * width), curY + (HEIGHT / 2),
@@ -127,22 +133,42 @@ void LegoBrick::DrawBrick()
                      curZ + (0.25 * length));
             break;
         case 8:
-            DrawStud(curX - (0.375 * width), curY + (HEIGHT / 2),
-                     curZ - (0.25 * length));
-            DrawStud(curX - (0.125 * width), curY + (HEIGHT / 2),
-                     curZ - (0.25 * length));
-            DrawStud(curX + (0.375 * width), curY + (HEIGHT / 2),
-                     curZ - (0.25 * length));
-            DrawStud(curX + (0.125 * width), curY + (HEIGHT / 2),
-                     curZ - (0.25 * length));
-            DrawStud(curX - (0.375 * width), curY + (HEIGHT / 2),
-                     curZ + (0.25 * length));
-            DrawStud(curX - (0.125 * width), curY + (HEIGHT / 2),
-                     curZ + (0.25 * length));
-            DrawStud(curX + (0.375 * width), curY + (HEIGHT / 2),
-                     curZ + (0.25 * length));
-            DrawStud(curX + (0.125 * width), curY + (HEIGHT / 2),
-                     curZ + (0.25 * length));
+            if(!rotated) {
+                DrawStud(curX - (0.375 * width), curY + (HEIGHT / 2),
+                         curZ - (0.25 * length));
+                DrawStud(curX - (0.125 * width), curY + (HEIGHT / 2),
+                         curZ - (0.25 * length));
+                DrawStud(curX + (0.375 * width), curY + (HEIGHT / 2),
+                         curZ - (0.25 * length));
+                DrawStud(curX + (0.125 * width), curY + (HEIGHT / 2),
+                         curZ - (0.25 * length));
+                DrawStud(curX - (0.375 * width), curY + (HEIGHT / 2),
+                         curZ + (0.25 * length));
+                DrawStud(curX - (0.125 * width), curY + (HEIGHT / 2),
+                         curZ + (0.25 * length));
+                DrawStud(curX + (0.375 * width), curY + (HEIGHT / 2),
+                         curZ + (0.25 * length));
+                DrawStud(curX + (0.125 * width), curY + (HEIGHT / 2),
+                         curZ + (0.25 * length));
+            } else {
+                DrawStud(curX - (0.25 * width), curY + (HEIGHT / 2),
+                         curZ - (0.375 * length));
+                DrawStud(curX - (0.25 * width), curY + (HEIGHT / 2),
+                         curZ - (0.125 * length));
+                DrawStud(curX + (0.25 * width), curY + (HEIGHT / 2),
+                         curZ - (0.375 * length));
+                DrawStud(curX + (0.25 * width), curY + (HEIGHT / 2),
+                         curZ - (0.125 * length));
+                DrawStud(curX - (0.25 * width), curY + (HEIGHT / 2),
+                         curZ + (0.375 * length));
+                DrawStud(curX - (0.25 * width), curY + (HEIGHT / 2),
+                         curZ + (0.125 * length));
+                DrawStud(curX + (0.25 * width), curY + (HEIGHT / 2),
+                         curZ + (0.375 * length));
+                DrawStud(curX + (0.25 * width), curY + (HEIGHT / 2),
+                         curZ + (0.125 * length));
+            }
+            break;
     }
 }
 
@@ -186,6 +212,11 @@ void LegoBrick::Rotate() {
     GLfloat temp = length;
     length = width;
     width = temp;
+    if(!rotated) {
+        rotated = true;
+    } else {
+        rotated = false;
+    }
     DrawBrick();
 }
 

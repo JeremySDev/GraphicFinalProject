@@ -41,8 +41,7 @@ void render()
  */
 void keyboardFunc(unsigned char key, int x, int y)
 {
-    float offset = 1;
-    float angle = 90.0f;
+    GLfloat offset = SEGMENT_WIDTH / 2;
     switch (key) {
         //spawn a 1x1 brick
         case '1':
@@ -86,12 +85,12 @@ void keyboardFunc(unsigned char key, int x, int y)
             break;
         //moves the current brick up
         case 'q':
-            bricks.at(curBrick).ChangeY(offset);
+            bricks.at(curBrick).ChangeY(HEIGHT);
             glutPostRedisplay();
             break;
         //moves the current brick down
         case 'e':
-            bricks.at(curBrick).ChangeY(-offset);
+            bricks.at(curBrick).ChangeY(-HEIGHT);
             glutPostRedisplay();
             break;
         //cycles through the possible choices for the brick color.
