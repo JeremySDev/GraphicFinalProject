@@ -30,20 +30,20 @@ LegoBrick::LegoBrick(BrickType type)
 {
     switch (type) {
         case x11:
-            length = 1 * STUD_WIDTH;
-            width = 1 * STUD_WIDTH;
+            length = 1 * SEGMENT_WIDTH;
+            width = 1 * SEGMENT_WIDTH;
             break;
         case x21:
-            length = 1 * STUD_WIDTH;
-            width = 2 * STUD_WIDTH;
+            length = 1 * SEGMENT_WIDTH;
+            width = 2 * SEGMENT_WIDTH;
             break;
         case x22:
-            length = 2 * STUD_WIDTH;
-            width = 2 * STUD_WIDTH;
+            length = 2 * SEGMENT_WIDTH;
+            width = 2 * SEGMENT_WIDTH;
             break;
         case x42:
-            length = 4 * STUD_WIDTH;
-            width = 2 * STUD_WIDTH;
+            length = 2 * SEGMENT_WIDTH;
+            width = 4 * SEGMENT_WIDTH;
             break;
     }
     curX = 0.0f;
@@ -107,6 +107,61 @@ void LegoBrick::DrawBrick()
     glVertex3f(curX + (width / 2), curY - (HEIGHT / 2), curZ + (length / 2));
     glVertex3f(curX + (width / 2), curY - (HEIGHT / 2), curZ - (length / 2));
     glEnd();
+
+    switch(brickType) {
+        case 1:
+            DrawStud(curX, curY + (HEIGHT / 2), curZ);
+            break;
+        case 2:
+            DrawStud(curX - (0.25 * width), curY + (HEIGHT / 2), curZ);
+            DrawStud(curX + (0.25 * width), curY + (HEIGHT / 2), curZ);
+            break;
+        case 4:
+            DrawStud(curX - (0.25 * width), curY + (HEIGHT / 2),
+                     curZ - (0.25 * length));
+            DrawStud(curX + (0.25 * width), curY + (HEIGHT / 2),
+                     curZ - (0.25 * length));
+            DrawStud(curX - (0.25 * width), curY + (HEIGHT / 2),
+                     curZ + (0.25 * length));
+            DrawStud(curX + (0.25 * width), curY + (HEIGHT / 2),
+                     curZ + (0.25 * length));
+            break;
+        case 8:
+            DrawStud(curX - (0.375 * width), curY + (HEIGHT / 2),
+                     curZ - (0.25 * length));
+            DrawStud(curX - (0.125 * width), curY + (HEIGHT / 2),
+                     curZ - (0.25 * length));
+            DrawStud(curX + (0.375 * width), curY + (HEIGHT / 2),
+                     curZ - (0.25 * length));
+            DrawStud(curX + (0.125 * width), curY + (HEIGHT / 2),
+                     curZ - (0.25 * length));
+            DrawStud(curX - (0.375 * width), curY + (HEIGHT / 2),
+                     curZ + (0.25 * length));
+            DrawStud(curX - (0.125 * width), curY + (HEIGHT / 2),
+                     curZ + (0.25 * length));
+            DrawStud(curX + (0.375 * width), curY + (HEIGHT / 2),
+                     curZ + (0.25 * length));
+            DrawStud(curX + (0.125 * width), curY + (HEIGHT / 2),
+                     curZ + (0.25 * length));
+    }
+}
+
+/**
+ * DrawStuds places and draws studs depending on the type of brick being drawn
+ */
+void LegoBrick::DrawStud(GLfloat baseX, GLfloat baseY, GLfloat baseZ) {
+    for(GLfloat i = 0.0f; i < STUD_HEIGHT; i += 0.05f) {
+        glBegin(GL_LINE_LOOP);
+        for(int j = 0; j < 20; j++) {
+            GLfloat degree = j * (360.0/20);
+            GLfloat radian = degree * M_PI / 180;
+
+            GLfloat z = STUD_RAD * sinf(radian);
+            GLfloat x = STUD_RAD * cosf(radian);
+            glVertex3f(baseX + x, baseY + i, baseZ + z);
+        }
+        glEnd();
+    }
 }
 
 /**
@@ -124,6 +179,9 @@ void LegoBrick::ChangeColor()
     DrawBrick();
 }
 
+/**
+ * Rotate rotates the brick by 90 degrees
+ */
 void LegoBrick::Rotate() {
     GLfloat temp = length;
     length = width;
@@ -131,13 +189,19 @@ void LegoBrick::Rotate() {
     DrawBrick();
 }
 
+/**
+ * ChangeX moves the brick in the X direction
+ *
+ * @param distance to move the brick
+ */
 void LegoBrick::ChangeX(GLfloat offset) {
     curX += offset;
 }
 
 /**
- * ChangeY changes the curY based on the offset passed in.
- * @param offset the amount by which to change curY
+ * ChangeY moves the brick in the Y direction
+ *
+ * @param distance to move the brick
  */
 void LegoBrick::ChangeY(GLfloat offset)
 {
@@ -145,8 +209,9 @@ void LegoBrick::ChangeY(GLfloat offset)
 }
 
 /**
- * ChangeZ changes the curZ based on the offset passed in.
- * @param offset the amount by which to change curZ
+ * ChangeZ moves the brick in the Z direction
+ *
+ * @param distance to move the brick
  */
 void LegoBrick::ChangeZ(GLfloat offset)
 {
@@ -156,6 +221,7 @@ void LegoBrick::ChangeZ(GLfloat offset)
 /**
  * GetBrickType returns what type of brick the current brick is i.e. 1x1, 1x2, 
  * 2x2, 2x4
+ *
  * @return the type of the brick 
  */
 int LegoBrick::GetBrickType()

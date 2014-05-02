@@ -13,7 +13,9 @@
 #include<GL/glut.h>
 
 #define HEIGHT 2
-#define STUD_WIDTH 1
+#define SEGMENT_WIDTH 1
+#define STUD_HEIGHT 0.25
+#define STUD_RAD 0.4
 
 //an enumeration for the size of the bricks.
 enum BrickType {
@@ -39,13 +41,17 @@ public:
     LegoBrick(BrickType type);
     //draws the brick
     void DrawBrick();
+    //Draw the studs on the brick
+    void DrawStud(GLfloat baseX, GLfloat baseY, GLfloat baseZ);
     //changes the color of the brick
     void ChangeColor();
+    //Rotate the current brick
     void Rotate();
+    //Move the brick along the X-axis
     void ChangeX(GLfloat offset);
-    //change the y position of the brick
+    //Move the brick along the Y-axis
     void ChangeY(GLfloat offset);
-    //change the z position of the brick
+    //Move the brick along the Z-axis
     void ChangeZ(GLfloat offset);
     //get what type of brick
     int GetBrickType();
