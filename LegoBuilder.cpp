@@ -20,6 +20,33 @@ std::vector<LegoBrick> bricks;
 //index of the currently-selected brick
 int curBrick = 0;
 
+/**
+ * DrawRoom draws three planes to outline the brick-building space
+ */
+void DrawRoom() {
+    glBegin(GL_QUADS);
+        glColor3f(0.647, 0.408, 0.165);
+
+        glNormal3d(0, 1, 0);
+        glVertex3f(-15.0, -HEIGHT / 2, -15.0);
+        glVertex3f(15.0, -HEIGHT / 2, -15.0);
+        glVertex3f(15.0, -HEIGHT / 2, 15.0);
+        glVertex3f(-15.0, -HEIGHT / 2, 15.0);
+
+        glNormal3d(0, 0, 1);
+        glVertex3f(-15.0, -HEIGHT / 2, -15.0);
+        glVertex3f(-15.0, (-HEIGHT / 2) + 15.0, -15.0);
+        glVertex3f(15.0, (-HEIGHT / 2) + 15.0, -15.0);
+        glVertex3f(15.0, -HEIGHT / 2, -15.0);
+
+        glNormal3d(1, 0, 0);
+        glVertex3f(-15.0, -HEIGHT / 2, -15.0);
+        glVertex3f(-15.0, (-HEIGHT / 2) + 15.0, -15.0);
+        glVertex3f(-15.0, (-HEIGHT / 2) + 15.0, 15.0);
+        glVertex3f(-15.0, -HEIGHT / 2, 15.0);
+    glEnd();
+}
+
 /* Creates the scene and draws the bricks*/
 void render()
 {
@@ -28,6 +55,7 @@ void render()
     glLoadIdentity();
     gluLookAt(1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
     glEnable(GL_DEPTH_TEST);
+    DrawRoom();
     //go through and redraw all the bricks
     for(int i = 0; i < bricks.size(); i++) {
         bricks.at(i).DrawBrick();
